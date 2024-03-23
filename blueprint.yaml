@@ -96,10 +96,11 @@ trigger:
     topic: "{{ base_topic }}/+/action"
 action:
 - variables:
-    command: '{{ trigger.event.data.command }}'
-    cluster_id: '{{ trigger.event.data.cluster_id }}'
-    endpoint_id: '{{ trigger.event.data.endpoint_id }}'
-    args: '{{ trigger.event.data.args }}'
+    controllertopic: "{{ base_topic }}/{{ device_attr(controller, 'name') }}/action"
+    # command: '{{ trigger.event.data.command }}'
+    # cluster_id: '{{ trigger.event.data.cluster_id }}'
+    # endpoint_id: '{{ trigger.event.data.endpoint_id }}'
+    # args: '{{ trigger.event.data.args }}'
     action_play: !input action_play
     action_vol_up: !input action_vol_up
     action_vol_down: !input action_vol_down
@@ -113,7 +114,10 @@ action:
     action_2,3: !input action_2,3
 - choose:
   # Play Button
-  - conditions: "{{ trigger.payload == 'toggle' }}"
+  - conditions: 
+    - "{{ trigger.payload == 'toggle' }}"
+    - "{{ trigger.payload != ''}}"
+    - "{{ trigger.topic == controllertopic }}"
     sequence: !input action_play
   - conditions:
     - '{{ command == ''step'' }}'
