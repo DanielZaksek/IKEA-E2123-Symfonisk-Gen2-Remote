@@ -8,6 +8,16 @@ blueprint:
     remote:
       name: Remote
       description: IKEA Symfonisk controller GEN2 to use
+      selector:
+        device:
+          integration: mqtt
+          manufacturer: IKEA
+          model: SYMFONISK sound remote gen2 (E2123)
+          multiple: false
+    base_topic:
+      name: Zigbee2MQTT Base mqtt topic
+      description: The base topic configured in Zigbee2MQTT. If you haven't changed this, leave the default here ("zigbee2mqtt")
+      default: zigbee2mqtt
     action_play:
       name: Play button press
       description: Action to run on play button press.
