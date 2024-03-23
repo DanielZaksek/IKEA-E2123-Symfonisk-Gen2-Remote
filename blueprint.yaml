@@ -115,7 +115,7 @@ action:
 - choose:
   # Play Button
   - conditions: 
-    - "{{ trigger.payload == 'toggle' }}"
+    - "{{ trigger.payload == 'play_pause' }}"
     - "{{ trigger.payload != ''}}"
     - "{{ trigger.topic == controllertopic }}"
     sequence: !input action_play
