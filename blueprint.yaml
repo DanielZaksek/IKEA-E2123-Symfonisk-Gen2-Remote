@@ -1,5 +1,5 @@
 blueprint:
-  name: ZHA - IKEA E2123 Symfonisk GEN2 remote
+  name: Z2M - IKEA E2123 Symfonisk GEN2 remote
   description: Set up custom commands for each button on the Ikea Symfonisk
     Gen 2 Remote. The 2 shortcut buttons also have seperate functions for 
     double press and hold.
@@ -109,10 +109,8 @@ action:
     action_2,2: !input action_2,2
     action_2,3: !input action_2,3
 - choose:
-  - conditions:
-    - '{{ command == ''toggle'' }}'
-    - '{{ cluster_id == 6 }}'
-    - '{{ endpoint_id == 1 }}'
+  # Play Button
+  - conditions: "{{ trigger.payload == 'toggle' }}"
     sequence: !input action_play
   - conditions:
     - '{{ command == ''step'' }}'
