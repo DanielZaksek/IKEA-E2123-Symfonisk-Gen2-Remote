@@ -8,11 +8,6 @@ blueprint:
     remote:
       name: Remote
       description: IKEA Symfonisk controller GEN2 to use
-      selector:
-        device:
-          manufacturer: IKEA of Sweden
-          model: SYMFONISK sound remote gen2
-          multiple: false
     action_play:
       name: Play button press
       description: Action to run on play button press.
