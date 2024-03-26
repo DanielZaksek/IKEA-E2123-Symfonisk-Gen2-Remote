@@ -60,6 +60,13 @@ blueprint:
       default: []
       selector:
         action: {}
+    # Long press
+    single_dot_long_press:
+      name: Single Dot (Long)
+      description: Action to run on single dot long press
+      default: []
+      selector: 
+        action: {}
 mode: single
 max_exceeded: silent
 
@@ -81,45 +88,40 @@ action:
     action_dot1: !input action_dot1
     action_dot2: !input action_dot2
 - choose:
-  # Play Button
-  - conditions: 
-    - "{{ trigger.payload == 'play_pause' }}"
-    - "{{ trigger.payload != ''}}"
-    - "{{ trigger.topic == controllertopic }}"
-    sequence: !input action_play
-  # Volume Up Button
   - conditions:
-    - "{{ trigger.payload == 'volume_up' }}"
-    - "{{ trigger.payload != ''}}"
-    - "{{ trigger.topic == controllertopic }}"
-    sequence: !input action_vol_up
-  # Volume Down Button
-  - conditions:
-    - "{{ trigger.payload == 'volume_down' }}"
-    - "{{ trigger.payload != ''}}"
-    - "{{ trigger.topic == controllertopic }}"
-    sequence: !input action_vol_down
-  # Next Button
-  - conditions:
-    - "{{ trigger.payload == 'track_next' }}"
-    - "{{ trigger.payload != ''}}"
-    - "{{ trigger.topic == controllertopic }}"
-    sequence: !input action_next
-  # Previous Button
-  - conditions:
-    - "{{ trigger.payload == 'track_previous' }}"
-    - "{{ trigger.payload != ''}}"
-    - "{{ trigger.topic == controllertopic }}"
-    sequence: !input action_previous
-  # Dot Button
-  - conditions:
-    - "{{ trigger.payload == 'dots_1_initial_press' }}"
-    - "{{ trigger.payload != ''}}"
-    - "{{ trigger.topic == controllertopic }}"
-    sequence: !input action_dot1
-  # Two Dot Button
-  - conditions:
-    - "{{ trigger.payload == 'dots_2_initial_press' }}"
-    - "{{ trigger.payload != ''}}"
-    - "{{ trigger.topic == controllertopic }}"
-    sequence: !input action_dot2
+      - "{{ trigger.payload != ''}}"
+      - "{{ trigger.topic == controllertopic }}"
+    sequence:
+      - choose:
+        # Play Button
+        - conditions: 
+          - "{{ trigger.payload == 'play_pause' }}"
+          sequence: !input action_play
+        # Volume Up Button
+        - conditions:
+          - "{{ trigger.payload == 'volume_up' }}"
+          sequence: !input action_vol_up
+        # Volume Down Button
+        - conditions:
+          - "{{ trigger.payload == 'volume_down' }}"
+          sequence: !input action_vol_down
+        # Next Button
+        - conditions:
+          - "{{ trigger.payload == 'track_next' }}"
+          sequence: !input action_next
+        # Previous Button
+        - conditions:
+          - "{{ trigger.payload == 'track_previous' }}"
+          sequence: !input action_previous
+        # Dot Button
+        - conditions:
+          - "{{ trigger.payload == 'dots_1_initial_press' }}"
+          sequence: !input action_dot1
+        # Two Dot Button
+        - conditions:
+          - "{{ trigger.payload == 'dots_2_initial_press' }}"
+          sequence: !input action_dot2
+        # Single Dot Long Press
+        - conditions: 
+          - "{{ trigger.payload == 'dots_1_long_press' }}"
+          sequence: !input single_dot_long_press
