@@ -67,6 +67,13 @@ blueprint:
       default: []
       selector: 
         action: {}
+    # Long press
+    volume_up_hold_press:
+      name: Volume Up (Long)
+      description: Action to run on volume up long press
+      default: []
+      selector: 
+        action: {}
 mode: single
 max_exceeded: silent
 
@@ -125,3 +132,6 @@ action:
         - conditions: 
           - "{{ trigger.payload == 'dots_1_long_press' }}"
           sequence: !input single_dot_long_press
+        - conditions: 
+          - "{{ trigger.payload == 'volume_up_hold' }}"
+          sequence: !input volume_up_hold_press
