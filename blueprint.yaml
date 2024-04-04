@@ -74,8 +74,8 @@ blueprint:
       selector: 
         action: {}
     volume_down_hold_press:
-      name: Volume Up (Long)
-      description: Action to run on volume up long press
+      name: Volume Down (Long)
+      description: Action to run on volume Down long press
       default: []
       selector: 
         action: {}
