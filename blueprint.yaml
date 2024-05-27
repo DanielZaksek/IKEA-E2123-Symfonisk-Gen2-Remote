@@ -129,6 +129,9 @@ action:
         - conditions: 
           - "{{ trigger.payload == 'play_pause' }}"
           sequence: !input action_play
+        - conditions: 
+          - "{{ trigger.payload == 'toggle' }}"
+          sequence: !input action_play
         # Volume Up Button
         - conditions:
           - "{{ trigger.payload == 'volume_up' }}"
